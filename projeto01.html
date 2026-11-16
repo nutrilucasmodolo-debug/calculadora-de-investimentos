@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimuladorDeInvestimento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <main class="container">
+
+        <header>
+            <h1>INVEST<span>+</span></h1>
+            <p>Simule seu futuro financeiro.</p>
+        </header>
+
+        <section class="calculadora">
+
+            <h2>Simulador de Investimentos</h2>
+            <p class="descricao">
+                Descubra o potencial dos seus investimentos com juros compostos.
+            </p>
+
+            <div class="campo">
+                <label for="ValorInicial">Valor inicial (R$)</label>
+                <input type="text" id="ValorInicial" placeholder="Ex: 1000">
+            </div>
+
+            <div class="campo">
+                <label for="AporteMensal">Aporte mensal (R$)</label>
+                <input type="text" id="AporteMensal" placeholder="Ex: 500">
+            </div>
+
+            <div class="linha">
+
+                <div class="campo">
+                    <label for="RendimentoMensal">Rendimento mensal (%)</label>
+                    <input type="text" id="RendimentoMensal" placeholder="Ex: 1">
+                </div>
+
+                <div class="campo">
+                    <label for="Tempo">Tempo (meses)</label>
+                    <input type="text" id="Tempo" placeholder="Ex: 12">
+                </div>
+    <div>
+        <p id="resultado"></p>
+    </div>
+
+        <input type="button" id="btnCalcular" onclick="Calcularinvestimento()" value="Calcular">
+        <label for="ValorInvestido">Valor Investido</label>
+        <input type="text" id="ValorInvestido" placeholder="Valor Investido" readonly>
+        <label for="Rendimentos">Rendimentos</label>
+        <input type="text" id="Rendimentos" placeholder="Rendimentos"  readonly>
+        <label for="ValorFinal">Valor Final</label>
+        <input type="text" id="ValorFinal" placeholder="Valor Final" readonly>
+
+    <script>
+        function Calcularinvestimento() {
+            
+        var ValorInicial = Number(document.getElementById("ValorInicial").value);
+        var AporteMensal = Number(document.getElementById("AporteMensal").value);
+
+        var RendimentoMensal = document.getElementById("RendimentoMensal").value;
+            RendimentoMensal = Number(RendimentoMensal.replace("%", "")) / 100;
+
+        var Tempo = Number(document.getElementById("Tempo").value);
+        
+        var ValorInvestido = Number(ValorInicial) + (Number(AporteMensal) * Number(Tempo));
+
+            var Saldo = Number(ValorInicial);
+            var Mes = 1;
+
+         while (Mes <= Tempo) {
+
+            Saldo = Saldo + AporteMensal;
+
+            var Juros = Saldo * RendimentoMensal;
+
+            Saldo = Saldo + Juros;
+
+            Mes++;
+}
+           var Rendimentos = Saldo - ValorInvestido;
+
+            document.getElementById("ValorInvestido").value = ValorInvestido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById("Rendimentos").value = Rendimentos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById("ValorFinal").value = Saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });            
+
+        }
+    </script>
+
+
+</body>
+</html>
